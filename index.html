@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FocusFlow Pro - Ultimate Productivity Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="bg-animation"></div>
+    
+    <!-- Floating Elements -->
+    <div class="floating-element"><i class="fas fa-star" style="font-size: 2rem; color: var(--primary-color);"></i></div>
+    <div class="floating-element"><i class="fas fa-heart" style="font-size: 1.5rem; color: var(--pink-color);"></i></div>
+    <div class="floating-element"><i class="fas fa-lightning-bolt" style="font-size: 2.5rem; color: var(--warning-color);"></i></div>
+    <div class="floating-element"><i class="fas fa-gem" style="font-size: 2rem; color: var(--accent-color);"></i></div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+    
+    <!-- Login Page -->
+    <div id="loginPage" class="auth-page">
+        <div class="auth-container">
+            <div class="auth-header">
+                <h1>🚀 Welcome Back</h1>
+                <p>Ready to boost your productivity to the next level?</p>
+            </div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">📧 Email Address</label>
+                    <input type="email" id="loginEmail" class="form-input" placeholder="your@email.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="loginPassword">🔐 Password</label>
+                    <input type="password" id="loginPassword" class="form-input" placeholder="Enter your password" required>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-rocket"></i>
+                    Launch My Day
+                </button>
+            </form>
+            
+            <div class="social-login">
+                <div class="social-divider">
+                    <span>Or continue with</span>
+                </div>
+                
+                <div class="social-buttons">
+                    <button class="btn btn-google" onclick="socialLogin('google')">
+                        <i class="fab fa-google"></i>
+                        Continue with Google
+                    </button>
+                    <button class="btn btn-github" onclick="socialLogin('github')">
+                        <i class="fab fa-github"></i>
+                        Continue with GitHub
+                    </button>
+                    <button class="btn btn-facebook" onclick="socialLogin('facebook')">
+                        <i class="fab fa-facebook-f"></i>
+                        Continue with Facebook
+                    </button>
+                </div>
+            </div>
+            
+            <div class="auth-footer">
+                New to FocusFlow? <a href="#" onclick="showRegister()">Create your account</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Page -->
+    <div id="registerPage" class="auth-page" style="display: none;">
+        <div class="auth-container">
+            <div class="auth-header">
+                <h1>✨ Join FocusFlow</h1>
+                <p>Start your journey to peak productivity</p>
+            </div>
+            
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="registerName">👤 Full Name</label>
+                    <input type="text" id="registerName" class="form-input" placeholder="Your awesome name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerEmail">📧 Email Address</label>
+                    <input type="email" id="registerEmail" class="form-input" placeholder="your@email.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerPassword">🔐 Password</label>
+                    <input type="password" id="registerPassword" class="form-input" placeholder="Create a strong password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword">🔍 Confirm Password</label>
+                    <input type="password" id="confirmPassword" class="form-input" placeholder="Confirm your password" required>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-user-plus"></i>
+                    Start My Journey
+                </button>
+            </form>
+            
+            <div class="social-login">
+                <div class="social-divider">
+                    <span>Or sign up with</span>
+                </div>
+                
+                <div class="social-buttons">
+                    <button class="btn btn-google" onclick="socialLogin('google')">
+                        <i class="fab fa-google"></i>
+                        Sign up with Google
+                    </button>
+                    <button class="btn btn-github" onclick="socialLogin('github')">
+                        <i class="fab fa-github"></i>
+                        Sign up with GitHub
+                    </button>
+                    <button class="btn btn-facebook" onclick="socialLogin('facebook')">
+                        <i class="fab fa-facebook-f"></i>
+                        Sign up with Facebook
+                    </button>
+                </div>
+            </div>
+            
+            <div class="auth-footer">
+                Already have an account? <a href="#" onclick="showLogin()">Sign in here</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="appContainer" class="app-container">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-content">
+                    <a href="#" class="logo">
+                        <i class="fas fa-rocket"></i>
+                        FocusFlow Pro
+                    </a>
+                    
+                    <div class="nav-controls">
+                        <button class="theme-toggle" onclick="toggleTheme()">
+                            <i class="fas fa-sun" id="themeIcon"></i>
+                        </button>
+                        
+                        <button class="music-toggle" onclick="toggleMusic()">
+                            <i class="fas fa-music" id="musicIcon"></i>
+                        </button>
+
+                        <button class="btn btn-secondary" onclick="toggleFocusMode()">
+                            <i class="fas fa-crosshairs"></i>
+                            Focus Mode
+                        </button>
+                        
+                        <div class="user-menu">
+                            <div class="user-avatar" id="userAvatar">JD</div>
+                            <button class="btn btn-secondary" onclick="logout()">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="app-grid">
+                <!-- Timer Section -->
+                <div class="timer-section">
+                    <h2><i class="fas fa-stopwatch"></i> Pomodoro Focus Timer</h2>
+                    
+                    <div class="progress-circle">
+                        <svg width="250" height="250">
+                            <defs>
+                                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <circle class="progress-circle-bg" cx="125" cy="125" r="100"></circle>
+                            <circle class="progress-circle-progress" cx="125" cy="125" r="100" 
+                                stroke-dasharray="628" stroke-dashoffset="628" id="progressCircle"></circle>
+                        </svg>
+                        <div class="progress-text" id="progressText">0%</div>
+                    </div>
+                    
+                    <div class="timer-display" id="timerDisplay">25:00</div>
+                    
+                    <div class="timer-controls">
+                        <button class="timer-btn btn-start" id="startBtn" onclick="startTimer()">
+                            <i class="fas fa-play"></i> Start Focus
+                        </button>
+                        <button class="timer-btn btn-pause" id="pauseBtn" onclick="pauseTimer()" style="display: none;">
+                            <i class="fas fa-pause"></i> Pause
+                        </button>
+                        <button class="timer-btn btn-reset" onclick="resetTimer()">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                    
+                    <div class="timer-settings">
+                        <div class="setting-item">
+                            <label>🏅 Work (min)</label>
+                            <input type="number" class="setting-input" id="workDuration" value="25" min="1" max="60">
+                        </div>
+                        <div class="setting-item">
+                            <label>☕ Break (min)</label>
+                            <input type="number" class="setting-input" id="breakDuration" value="5" min="1" max="30">
+                        </div>
+                        <div class="setting-item">
+                            <label>🌟 Long Break (min)</label>
+                            <input type="number" class="setting-input" id="longBreakDuration" value="15" min="1" max="60">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Side Panel -->
+                <div class="side-panel">
+                    <!-- Stats Section -->
+                    <div class="stats-section">
+                        <div class="section-header">
+                            <h3><i class="fas fa-chart-line"></i> Today's Progress</h3>
+                            <button class="btn btn-secondary" onclick="resetStats()">
+                                <i class="fas fa-refresh"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-value" id="focusTime">0h 0m</div>
+                                <div class="stat-label">⏰ Focus Time</div>
+                            </div>
+                            
+                            <div class="stat-card">
+                                <div class="stat-value" id="completedTasks">0</div>
+                                <div class="stat-label">✅ Tasks Done</div>
+                            </div>
+                            
+                            <div class="stat-card">
+                                <div class="stat-value" id="pomodoroCount">0</div>
+                                <div class="stat-label">🏅 Pomodoros</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Music Section -->
+                    <div class="music-section">
+                        <div class="section-header">
+                            <h3><i class="fas fa-headphones"></i> Focus Music</h3>
+                            <button class="btn btn-secondary" onclick="toggleMusicPlayer()">
+                                <i class="fas fa-expand" id="musicExpandIcon"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="music-player">
+                            <div class="current-track" id="currentTrack">No track selected</div>
+                            
+                            <div class="playlist-selector">
+                                <div class="playlist-buttons">
+                                    <button class="playlist-btn" onclick="selectPlaylist('lofi')" data-playlist="lofi">
+                                        🎵 Lo-Fi Beats
+                                    </button>
+                                    <button class="playlist-btn" onclick="selectPlaylist('nature')" data-playlist="nature">
+                                        🌿 Nature Sounds
+                                    </button>
+                                    <button class="playlist-btn" onclick="selectPlaylist('classical')" data-playlist="classical">
+                                        🎼 Classical
+                                    </button>
+                                    <button class="playlist-btn" onclick="selectPlaylist('ambient')" data-playlist="ambient">
+                                        🌌 Ambient
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="music-controls">
+                                <button class="btn btn-secondary" onclick="playPauseMusic()">
+                                    <i class="fas fa-play" id="playPauseIcon"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="volume-control">
+                                <label>🔊 Volume</label>
+                                <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="50">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tasks Section -->
+            <div class="tasks-section">
+                <div class="tasks-header">
+                    <h2><i class="fas fa-tasks"></i> Task Command Center</h2>
+                    <div class="goal-display">🎯 Daily Goal: <span id="dailyGoal">5</span> tasks</div>
+                </div>
+                
+                <div class="add-task-form">
+                    <input type="text" class="task-input" id="taskInput" placeholder="What needs to be conquered today? ⚡">
+                    <button class="btn btn-primary" onclick="addTask()">
+                        <i class="fas fa-plus"></i> Add Mission
+                    </button>
+                </div>
+
+                <!-- Motivational Image -->
+                <div id="motivationalImageContainer" class="motivational-image" style="display: none;">
+                    <img id="motivationalImg" src="" alt="Motivational Image">
+                    <p id="motivationalImgText"></p>
+                </div>
+                
+                <div class="task-list" id="taskList">
+                    <!-- Tasks will be added dynamically -->
+                </div>
+            </div>
+
+            <!-- Enhanced Motivational Quote -->
+            <div class="motivational-quote">
+                <div class="quote-text" id="quoteText">
+                    "The way to get started is to quit talking and begin doing."
+                </div>
+                <div class="quote-author" id="quoteAuthor">- Walt Disney</div>
+                
+                <div class="quote-controls">
+                    <button class="quote-btn btn-listen" onclick="speakQuote()">
+                        <i class="fas fa-volume-up"></i> Listen
+                    </button>
+                    <button class="quote-btn btn-new-quote" onclick="displayRandomQuote()">
+                        <i class="fas fa-refresh"></i> New Quote
+                    </button>
+                </div>
+            </div>
+
+            <!-- Leaderboard -->
+            <div class="leaderboard-section">
+                <div class="leaderboard-header">
+                    <h2><i class="fas fa-trophy"></i> Productivity Champions</h2>
+                    <p>See how you rank among top performers!</p>
+                </div>
+                
+                <div class="leaderboard-list" id="leaderboardList">
+                    <!-- Leaderboard items will be generated -->
+                </div>
+            </div>
+
+            <!-- Habit Tracker -->
+            <div class="habit-tracker">
+                <div class="section-header">
+                    <h3><i class="fas fa-calendar-check"></i> 21-Day Habit Tracker</h3>
+                    <button class="btn btn-secondary" onclick="resetHabits()">
+                        <i class="fas fa-refresh"></i> Reset
+                    </button>
+                </div>
+                
+                <p style="margin-bottom: 1rem; color: var(--text-secondary);">
+                    Track your daily productivity streak! Click on days to mark them as completed.
+                </p>
+                
+                <div class="habit-grid" id="habitGrid">
+                    <!-- Habit days will be generated -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Focus Mode Overlay -->
+    <div id="focusModeOverlay" class="focus-mode-overlay">
+        <div class="focus-mode-content">
+            <div class="focus-mode-timer" id="focusModeTimer">25:00</div>
+            <div class="focus-mode-message" id="focusModeMessage">🎯 Deep Focus Mode Active</div>
+            <button class="btn btn-primary" onclick="exitFocusMode()">
+                <i class="fas fa-times"></i> Exit Focus Mode
+            </button>
+        </div>
+    </div>
+
+    <div id="notification" class="notification"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
